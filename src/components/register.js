@@ -1,9 +1,17 @@
 import React, { useState } from "react";
-import {Grid,Paper,Avatar,TextField,Button} from "@material-ui/core";
+import {Grid,Paper,Avatar,TextField,Button, Snackbar} from "@material-ui/core";
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
+import axios from "axios";
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const Register=() =>{
     const [values,setValues]= useState({});
+    const [openSnak,setSnak] = useState(false);
+    const [snakMessage,setSnakMessage]= useState("");
 
     const onChange = (event)=>{
         console.log(event.target.name);
@@ -14,9 +22,18 @@ const Register=() =>{
         console.log(values);
     }
 
-    const onSubmit = (event)=>{
+    const onSubmit = async (event)=>{
         event.preventDefault();
-        console.log("Send Request for sign up");
+        const res = await axios.post("http://localhost:5000/api/users/register",values);
+        console.log("sign up response:",res);
+        if(res.data.username){
+            setSnak(true);
+            setSnakMessage("Sucessfully SignUp!")
+        }
+        if(res.data.success === false) {
+            setSnak(true);
+            setSnakMessage("User Already Exists");
+        }
     }
 
     const paperstyle = {height:"74.05vh", width:"62.5vw" , borderRadius: "5%"}
@@ -53,6 +70,11 @@ const Register=() =>{
                 </Grid>
                 
             </Paper>
+            <Snackbar open={openSnak} autoHideDuration={6000} onClose={()=>setSnak(false)}>
+                <Alert onClose={()=>setSnak(false)} severity={snakMessage==="Sucessfully SignUp!"? "success":"error"}>
+                    {snakMessage}
+                </Alert>
+            </Snackbar>
             </Grid>
     )
 }

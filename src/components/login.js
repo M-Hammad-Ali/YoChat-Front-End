@@ -1,11 +1,19 @@
 import React, { useState } from "react";
-import {Grid, Paper, Avatar, TextField, Button } from "@material-ui/core";
+import {Grid, Paper, Avatar, TextField, Button, Snackbar } from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import axios from "axios";
+import MuiAlert from '@material-ui/lab/Alert';
+
+function Alert(props) {
+  return <MuiAlert elevation={6} variant="filled" {...props} />;
+}
 
 const Login = () => {
     const [values,setValues] = useState({});
+    const [openSnak,setSnak] = useState(false);
+    const [snakMessage,setSnakMessage]= useState("");
 
     const onChange = (event)=>{
         setValues({
@@ -15,9 +23,19 @@ const Login = () => {
 
     }
 
-    const onSubmit = (event)=>{
+    const onSubmit =async (event)=>{
         event.preventDefault();
-        console.log("send request for login");
+        const res = await axios.post('http://localhost:5000/api/users/login',values);
+        console.log("login response",res);
+        if(res.data.success){
+            setSnak(true);
+            setSnakMessage("Sucessfully Logged In!")
+        }
+        if(res.data.success === false) {
+            setSnak(true);
+            setSnakMessage("Please Provide Correct Credentials!");
+        }
+
     }
 
     const paperstyle = {height:"74.05vh", width:"62.5vw" , borderRadius: "5%"}
@@ -60,6 +78,11 @@ const Login = () => {
                 </Grid>
 
             </Paper>
+            <Snackbar open={openSnak} autoHideDuration={6000} onClose={()=>setSnak(false)}>
+                <Alert onClose={()=>setSnak(false)} severity={snakMessage==="Sucessfully Logged In!"? "success":"error"}>
+                    {snakMessage}
+                </Alert>
+            </Snackbar>
         </Grid>
     )
 }
