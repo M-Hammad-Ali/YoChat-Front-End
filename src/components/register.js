@@ -3,6 +3,7 @@ import {Grid,Paper,Avatar,TextField,Button, Snackbar} from "@material-ui/core";
 import PersonAddOutlinedIcon from '@material-ui/icons/PersonAddOutlined';
 import axios from "axios";
 import MuiAlert from '@material-ui/lab/Alert';
+import {useHistory} from 'react-router-dom';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -12,6 +13,7 @@ const Register=() =>{
     const [values,setValues]= useState({});
     const [openSnak,setSnak] = useState(false);
     const [snakMessage,setSnakMessage]= useState("");
+    const history = useHistory();
 
     const onChange = (event)=>{
         console.log(event.target.name);
@@ -28,7 +30,10 @@ const Register=() =>{
         console.log("sign up response:",res);
         if(res.data.username){
             setSnak(true);
-            setSnakMessage("Sucessfully SignUp!")
+            setSnakMessage("Sucessfully SignUp!");
+            setTimeout(()=>{
+                history.push('/home');
+            },2000);
         }
         if(res.data.success === false) {
             setSnak(true);

@@ -3,15 +3,21 @@ import SignInOutContainer from './containers';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Media from "react-media";
 import Main from "./components/main"
+import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 
 const body = {backgroundColor:"#d5f8e7"}
 
 function App() {
 
   return (
-    <div style={body} className="App">
-     <SignInOutContainer/>
-    </div>
+    <Router>
+        <div style={body} className="App">
+          <Switch>
+            <Route exact path="/" component={SignInOutContainer}/>
+            <Route exact path="/home" component={Main}/>
+          </Switch>
+        </div>
+    </Router>
   );
 }
 

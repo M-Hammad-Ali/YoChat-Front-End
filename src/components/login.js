@@ -5,6 +5,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import axios from "axios";
 import MuiAlert from '@material-ui/lab/Alert';
+import {useHistory} from 'react-router-dom';
 
 function Alert(props) {
   return <MuiAlert elevation={6} variant="filled" {...props} />;
@@ -14,6 +15,7 @@ const Login = () => {
     const [values,setValues] = useState({});
     const [openSnak,setSnak] = useState(false);
     const [snakMessage,setSnakMessage]= useState("");
+    const history = useHistory();
 
     const onChange = (event)=>{
         setValues({
@@ -29,7 +31,10 @@ const Login = () => {
         console.log("login response",res);
         if(res.data.success){
             setSnak(true);
-            setSnakMessage("Sucessfully Logged In!")
+            setSnakMessage("Sucessfully Logged In!");
+            setTimeout(()=>{
+                history.push('/home');
+            },2000);
         }
         if(res.data.success === false) {
             setSnak(true);
