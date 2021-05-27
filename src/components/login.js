@@ -17,6 +17,7 @@ const Login = () => {
 
     const onSubmit = (event)=>{
         event.preventDefault();
+        console.log("send request for login");
     }
 
     const paperstyle = {height:"74.05vh", width:"62.5vw" , borderRadius: "5%"}
@@ -53,7 +54,7 @@ const Login = () => {
                                 label="Remember Me"
                             /><br />
 
-                            <Button type="submit" onSubmit={onSubmit} disabled={!(values.username && values.password)} color="primary" variant="contained" style={{backgroundColor: !(values.username && values.password)? "":"#203237"}}>Sign In</Button>
+                            <Button type="submit" onClick={onSubmit} disabled={!(values.username && values.password)} color="primary" variant="contained" style={{backgroundColor: !(values.username && values.password)? "":"#203237"}}>Sign In</Button>
                         </Grid>
                     </Grid>
                 </Grid>

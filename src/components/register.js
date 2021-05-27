@@ -16,6 +16,7 @@ const Register=() =>{
 
     const onSubmit = (event)=>{
         event.preventDefault();
+        console.log("Send Request for sign up");
     }
 
     const paperstyle = {height:"74.05vh", width:"62.5vw" , borderRadius: "5%"}
@@ -45,7 +46,7 @@ const Register=() =>{
 
                 <Button type="submit" color="primary" variant= "contained" disabled={!(values.username && values.password && values.firstName && values.lastName && values.email)} 
                     style={{backgroundColor: !(values.username && values.password && values.firstName && values.lastName && values.email)? "":"#203237",margin:"7% 2%"}}
-                    onSubmit={onSubmit}
+                    onClick={onSubmit}
                 >Sign Up</Button>
                 </Grid>
                 </Grid>
