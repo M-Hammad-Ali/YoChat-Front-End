@@ -1,10 +1,23 @@
-import React from "react";
+import React, { useState } from "react";
 import {Grid, Paper, Avatar, TextField, Button } from "@material-ui/core";
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 
 const Login = () => {
+    const [values,setValues] = useState({});
+
+    const onChange = (event)=>{
+        setValues({
+            ...values,
+            [event.target.name]:event.target.value
+        });
+
+    }
+
+    const onSubmit = (event)=>{
+        event.preventDefault();
+    }
 
     const paperstyle = {height:"74.05vh", width:"62.5vw" , borderRadius: "5%"}
     const photo = {height:"60vh", width:"30vw"}
@@ -23,13 +36,13 @@ const Login = () => {
             <Paper style={paperstyle}>
 
                 <Grid container spacing={0}>
-                    <Grid style={gridstyle1} xs={6} ><img style={photo} src="./images/Login.jpg"></img></Grid>
+                    <Grid style={gridstyle1} xs={6} ><img style={photo} src="./images/Login.jpg" alt="login"></img></Grid>
                     <Grid style={gridstyle2} xs={6} >
                         <Grid style={gridstyle3} align="center">
                             <Avatar style={avatarstyle}><LockOutlinedIcon></LockOutlinedIcon></Avatar>
                             <h2>SIGN IN</h2>
-                            <TextField style={user} label="Username" placeholder="Enter Username" fullwidth required></TextField><br />
-                            <TextField style={user} label="Password" placeholder="Enter Password" type="password" fullwidth required></TextField><br />
+                            <TextField error={(values.username==="")} style={user} name="username" label="Username" placeholder="Enter Username" fullwidth required onChange={onChange}></TextField><br />
+                            <TextField error={(values.password==="")} style={user} name="password" label="Password" placeholder="Enter Password" type="password" fullwidth required onChange={onChange}></TextField><br />
                             <FormControlLabel style={checkbox}
                                 control={
                                     <Checkbox
@@ -40,7 +53,7 @@ const Login = () => {
                                 label="Remember Me"
                             /><br />
 
-                            <Button type="submit" color="primary" variant="contained" style={buttonstyle}>Sign In</Button>
+                            <Button type="submit" onSubmit={onSubmit} disabled={!(values.username && values.password)} color="primary" variant="contained" style={{backgroundColor: !(values.username && values.password)? "":"#203237"}}>Sign In</Button>
                         </Grid>
                     </Grid>
                 </Grid>

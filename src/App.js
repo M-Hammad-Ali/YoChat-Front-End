@@ -1,7 +1,4 @@
 import './App.css';
-import Login from './components/login';
-import Register from "./components/register"
-import Test from "./components/test"
 import SignInOutContainer from './containers';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import Media from "react-media";
@@ -13,7 +10,7 @@ function App() {
 
   return (
     <div style={body} className="App">
-     <Main/>
+     <SignInOutContainer/>
     </div>
   );
 }
