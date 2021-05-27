@@ -1,0 +1,58 @@
+.paperstyle { 
+    padding: "100px auto";
+    height: "73.6vh";
+    width: 1000;
+    border-radius: "0px 0px 25px 25px"; 
+}
+
+.photo { 
+    height: "60vh";
+    width: 500;
+}
+
+.gridstyle1 { 
+    padding: "50px 0px"; 
+}
+     
+.gridstyle2 { 
+    background-color: "#92E3A9"; 
+    border-radius: "0px 0px 25px 0px"; 
+}
+
+.gridstyle3 { 
+    padding: "30px 100px";
+    height: "60vh"; 
+    width: 300; 
+}
+
+.avatarstyle {
+    margin: "25px 5px"; 
+    background-color: "#203237";
+}
+
+.register_avatarstyle {
+    margin: "25px 8px"; 
+    background-color: "#203237";
+}
+
+.user { 
+    margin: "10px 8px"; 
+}
+
+.register_user { 
+    margin: "3px 2px"; 
+}
+
+.checkbox { 
+    margin: "15px 8px"; 
+}
+
+.buttonstyle { 
+    background-color: "#203237"; 
+    margin: "10px 8px"; 
+}
+
+.register_buttonstyle { 
+    background-color: "#203237"; 
+    margin: "20px 8px"; 
+}
