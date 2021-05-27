@@ -24,12 +24,12 @@ function Main() {
     const right_grid = {height:"80vh", width: "60vw", align: "right"}
     const title = {height: "8vh", width: "20vw", backgroundColor:"#92E3A9"}
     const avatarstyle = {margin:"20% 25%", backroundColor:"#203237"}
-    const title_name = {color: "#203237"}
+    const title_name = {color: "#203237",marginLeft:"20px"}
     const buttonstyle = {margin:"20%"}
     const buttonstyle1 = {margin:"15%"}
     const buttonstyle3 = {margin:"15%"}
-    const srh = {height: "4.5vh", width:"20vw", backgroundColor: "#92E3A9", padding:"3% 0"}
-    const search = {height: "4.5vh", width: "18vw", margin:"0 5%",  backgroundColor:"#d5f8e7", borderRadius: "5px"}
+    const srh = {height: "7.5vh", width:"20vw", backgroundColor: "#92E3A9", padding:"3% 0"}
+    const search = {height: "6.5vh", width: "18vw", margin:"0 5%",  backgroundColor:"#d5f8e7", borderRadius: "30px"}
     const chatBox = { padding:"1.5% 1%"}
     const chatBox1 = { height:"5.5vh", backgroundColor:"#ffffff", borderRadius: "3%/50%", align:"left"}
     const searchInput = {position: 'relative' }
@@ -72,11 +72,9 @@ function Main() {
 
             <div style={srh}>
                 <Grid style={search} container spacing={1} alignItems="flex-end">
-                    <Grid item>
+                    <Grid item style={{display:"flex",alignItems:"center"}}>
                         <SearchIcon />
-                    </Grid>
-                    <Grid item>
-                        <InputBase id="input-with-icon-grid" placeholder="Search....." style={searchInput}/>
+                        <InputBase id="input-withs-icon-grid" placeholder="Search....."/>
                     </Grid>
                 </Grid>
             </div>
