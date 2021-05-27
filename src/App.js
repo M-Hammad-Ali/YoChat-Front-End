@@ -13,7 +13,7 @@ function App() {
 
   return (
     <div style={body} className="App">
-      <Register/>
+     <SignInOutContainer/>
     </div>
   );
 }

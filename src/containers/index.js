@@ -16,7 +16,7 @@ const handleChange = (event, newValue) => {
 }
 
 const gridStyle = {padding:"4.5% 20%"}
-const paperStyle = {width:1000, borderRadius:"5%"}
+const paperStyle = {width:"62.5vw", borderRadius:"5%"}
 const tabstyle = {backgroundColor: "#d9d9d9", borderRadius:"25px 25px 0px 0px"}
 
 function TabPanel(props) {
