@@ -32,7 +32,7 @@ const Register=() =>{
             setSnak(true);
             setSnakMessage("Sucessfully SignUp!");
             setTimeout(()=>{
-                history.push('/home');
+                history.push('/');
             },2000);
         }
         if(res.data.success === false) {
@@ -45,7 +45,7 @@ const Register=() =>{
     const photo = {height:"60vh", width:"30vw"}
     const gridstyle1 = {padding:"5% 0%"}
     const gridstyle2 = {backgroundColor:"#92E3A9", borderRadius: "0% 0% 5% 0%"}
-    const gridstyle3 = {padding:"5% 20%", height:"60vh", width:"19vw"}
+    const gridstyle3 = {padding:"5% 20%", height:"60vh", width:"30vw"}
     const avatarstyle = {margin:"8% 3%", backgroundcolor: "#203237"}
     const user = {margin:"1% 1%"}
     const buttonstyle = {backgroundColor:"#203237", margin:"7% 2%"}

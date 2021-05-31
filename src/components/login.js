@@ -34,6 +34,8 @@ const Login = () => {
             setSnakMessage("Sucessfully Logged In!");
             setTimeout(()=>{
                 history.push('/home');
+                localStorage.setItem('token',res.data.token);
+                localStorage.setItem('username',values.username);
             },2000);
         }
         if(res.data.success === false) {
@@ -47,7 +49,7 @@ const Login = () => {
     const photo = {height:"60vh", width:"30vw"}
     const gridstyle1 = {padding:"5% 0%"}
     const gridstyle2 = {backgroundColor:"#92E3A9", borderRadius: "0% 0% 5% 0%"}
-    const gridstyle3 = {padding:"5% 20%", height:"60vh", width:"19vw"}
+    const gridstyle3 = {padding:"5% 20%", height:"60vh", width:"30vw"}
     const avatarstyle = {margin:"8% 3%", backgroundcolor: "#203237"}
     const user = {margin:"5% 5%"}
     const buttonstyle = {backgroundColor:"#203237", margin:"5% 2%"}
@@ -64,20 +66,18 @@ const Login = () => {
                     <Grid style={gridstyle2} xs={6} >
                         <Grid style={gridstyle3} align="center">
                             <Avatar style={avatarstyle}><LockOutlinedIcon></LockOutlinedIcon></Avatar>
-                            <h2>SIGN IN</h2>
-                            <TextField error={(values.username==="")} style={user} name="username" label="Username" placeholder="Enter Username" fullwidth required onChange={onChange}></TextField><br />
-                            <TextField error={(values.password==="")} style={user} name="password" label="Password" placeholder="Enter Password" type="password" fullwidth required onChange={onChange}></TextField><br />
-                            <FormControlLabel style={checkbox}
-                                control={
-                                    <Checkbox
-                                        name="checkedB"
-                                        color="primary"
-                                    />
-                                }
-                                label="Remember Me"
-                            /><br />
-
-                            <Button type="submit" onClick={onSubmit} disabled={!(values.username && values.password)} color="primary" variant="contained" style={{backgroundColor: !(values.username && values.password)? "":"#203237"}}>Sign In</Button>
+                             { localStorage.getItem('token') === null || localStorage.getItem('token') === ""  ? <> <h2>SIGN IN</h2>
+                                <TextField error={(values.username==="")} style={user} name="username" label="Username" placeholder="Enter Username" fullwidth required onChange={onChange}></TextField><br />
+                                <TextField error={(values.password==="")} style={user} name="password" label="Password" placeholder="Enter Password" type="password" fullwidth required onChange={onChange}></TextField><br />
+                                <Button type="submit" onClick={onSubmit} disabled={!(values.username && values.password)} color="primary" variant="contained" style={{backgroundColor: !(values.username && values.password)? "":"#203237"}}>Sign In</Button>
+                                </>
+                            :  
+                                <>
+                                    <h2>You are already Logged In</h2>
+                                    <Button  color="primary" variant="contained" style={{backgroundColor: "#203237"}} onClick={()=>history.push('/home')}>Open Chat Dashboard</Button>
+                                    <Button  color="primary" variant="contained" style={{backgroundColor: "#203237",marginTop:10}} onClick={()=>{localStorage.removeItem('token');history.push('/')}}>Logout</Button>
+                                </>
+                            }
                         </Grid>
                     </Grid>
                 </Grid>
