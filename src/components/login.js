@@ -30,12 +30,13 @@ const Login = () => {
         const res = await axios.post('http://localhost:5000/api/users/login',values);
         console.log("login response",res);
         if(res.data.success){
+            localStorage.setItem('token',res.data.token);
+            localStorage.setItem('username',values.username);
             setSnak(true);
             setSnakMessage("Sucessfully Logged In!");
             setTimeout(()=>{
                 history.push('/home');
-                localStorage.setItem('token',res.data.token);
-                localStorage.setItem('username',values.username);
+                
             },2000);
         }
         if(res.data.success === false) {
@@ -75,7 +76,7 @@ const Login = () => {
                                 <>
                                     <h2>You are already Logged In</h2>
                                     <Button  color="primary" variant="contained" style={{backgroundColor: "#203237"}} onClick={()=>history.push('/home')}>Open Chat Dashboard</Button>
-                                    <Button  color="primary" variant="contained" style={{backgroundColor: "#203237",marginTop:10}} onClick={()=>{localStorage.removeItem('token');history.push('/')}}>Logout</Button>
+                                    <Button  color="primary" variant="contained" style={{backgroundColor: "#203237",marginTop:10}} onClick={()=>{localStorage.removeItem('token');localStorage.removeItem('username');history.push('/')}}>Logout</Button>
                                 </>
                             }
                         </Grid>

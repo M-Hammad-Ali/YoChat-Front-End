@@ -1,13 +1,14 @@
 import React , { useEffect, useRef, useState } from 'react';
 import { Avatar, IconButton, TextField } from '@material-ui/core';
-import { AttachFile, SearchOutlined,MoreVert, InsertEmoticon, Mic, Chat, DonutLarge, PersonAdd, NotInterested} from '@material-ui/icons';
+import { AttachFile, SearchOutlined,MoreVert, InsertEmoticon, Mic, Chat, DonutLarge, PersonAdd, NotInterested, Save} from '@material-ui/icons';
 import axios from 'axios';
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import moment from 'moment';
 
 import './home.css';
 import BackgroundPic from '../assets/Register.png';
 
-function Home({messages}) {
+function Home() {
 
     const [input,setInput] = useState("");
     const [user,setUser] = useState({});
@@ -16,9 +17,11 @@ function Home({messages}) {
     const [allFriends,setFriends] = useState([]);
     const [chat,setChat] = useState([]);
     const divRef = useRef(null);
+    
 
     useEffect(async ()=>{
         const username = localStorage.getItem('username');
+        console.log(username);
         const res = await axios.post('http://localhost:5000/api/users/userdata',{
             username:username
         });
@@ -30,16 +33,30 @@ function Home({messages}) {
         console.log(res.data);
     },[]);
 
+    
+
+
     const sendMessage = async e => {
         e.preventDefault();
 
-        await axios.post("/messages/new",{
-            message:input,
-            name:"Hammad Ali",
-            timestamp:"Just now!",
-            received:true
-        });
+        console.log("sendMessage",input);
+        console.log("user",selectedUser);
+        let m = moment().format("MM ddd, YYYY HH:mm:ss a");
 
+        console.log("chat",selectedUser);
+        const messageSaveRes = await axios.post('http://localhost:5000/api/chats/send',{
+            curUser:localStorage.getItem("username"),
+            handle:selectedUser.userHandle1=== localStorage.getItem('username') ? selectedUser.userHandle2 : selectedUser.userHandle1,
+            from: localStorage.getItem('username'),
+            msgText:input,
+            timestamp:m,
+            seenByFrom:true,
+            seenByTo:false,
+            to:selectedUser.userHandle1=== localStorage.getItem('username') ? selectedUser.userHandle2 : selectedUser.userHandle1,
+        });
+        setChat(messageSaveRes.data.msgs); 
+        console.log("MEssage Saved Response",messageSaveRes);
+        divRef.current.scrollIntoView({ behavior: 'smooth' });
         setInput('');
     }
 
@@ -82,11 +99,63 @@ function Home({messages}) {
         });
         console.log(res);
         setSelectedUser(res.data);
+        if(res.data.msgs){
+            setChat(res.data.msgs);
+        }
         if(res.data !== null && res.data.success !==false){
             divRef.current.scrollIntoView({ behavior: 'smooth' });
         }
+        let messagesID = [];
+        for(let msg in res.data.msgs){
+            if(res.data.msgs[msg].to === localStorage.getItem('username')){
+                messagesID.push(res.data.msgs[msg]._id);
+            }
+        }
+        console.log(messagesID);
+        let delMessagesID = [];
+        for(let msg in res.data.msgs){
+            if(res.data.msgs[msg].to === localStorage.getItem('username') && res.data.msgs[msg].seenByFrom && res.data.msgs[msg].seenByTo && !(res.data.msgs[msg].saved)){
+                delMessagesID.push(res.data.msgs[msg]._id);
+            }
+        }
+        console.log(delMessagesID);
+        if(res.data.msgs && delMessagesID.length>0){
+            const deleteMessagesRes = await axios.post('http://localhost:5000/api/chats/deleteMsg',{
+                handle:username,
+                curUser:localStorage.getItem('username'),
+                ids:messagesID
+            });
+            console.log("messages delete",deleteMessagesRes);
+        }
+        const seenMessageRes = await axios.post('http://localhost:5000/api/chats/seenMsg',{
+                handle:username,
+                curUser:localStorage.getItem('username'),
+                msgIDs:messagesID
+        })
+
+        console.log("seenMessageres",seenMessageRes);
     }
 
+
+    const saveMessageHandle = async (chatSave)=>{
+        console.log("save message call for",chatSave);
+
+        let messageID=[];
+        messageID.push(chatSave._id);
+        const saveMessageRes = await axios.post('http://localhost:5000/api/chats/saveMsg',{
+                handle:selectedUser.userHandle1=== localStorage.getItem('username') ? selectedUser.userHandle2 : selectedUser.userHandle1,
+                curUser:localStorage.getItem('username'),
+                msgIDs:messageID
+        })
+        let chatFilter = chat.filter(cht=>cht._id !== chatSave._id);
+        chatSave.saved = true;
+        console.log("chat filter",chatFilter);
+        chatFilter.push(chatSave);
+        setChat([
+            ...chatFilter
+        ])
+        console.log("seenMessageres",saveMessageRes);
+    }
 
     return (
     <div className="app">
@@ -148,7 +217,9 @@ function Home({messages}) {
                                 <>
                                     {
                                         allFriends.map(friend=>(
-                                            <div className="sidebarChat" key={friend} onClick={()=>handleSelectUser(friend)}>
+                                            <div className="sidebarChat" key={friend} onClick={()=>handleSelectUser(friend)}
+                                                style={{backgroundColor:selectedUser!== null && selectedUser.userHandle1===friend ? "#ebebeb":null}}
+                                            >
                                                 <Avatar/>
                                                 <div className="sidebarChat_info">
                                                     <h2>{friend}</h2>
@@ -184,20 +255,22 @@ function Home({messages}) {
                             </IconButton>
                         </div>
                     </div>
-                    {console.log(selectedUser)}
                     {selectedUser !== null? 
                         <>
                         <div className="chat_body" style={{
                                 backgroundImage: 'url("https://theabbie.github.io/blog/assets/official-whatsapp-background-image.jpg")'
                         }}>  
-                            {selectedUser.msgs && selectedUser.msgs.map(cht=>(
-                                <p className={`chat_message ${cht.from === localStorage.getItem('username') ? "chat_sender" : " chat_reciever"}`}>
+                            {chat && chat.map(cht=>(
+                                <>
+                                <p className={`chat_message ${cht.from === localStorage.getItem('username') ? "chat_reciever" : "chat_sender"}`}>
                                 <span className="chat_name">{cht.from}</span>
                                     {cht.msgText}
                                 <span className="chat_timestamp">
-                                    {cht.timestamp}
+                                    {moment().fromNow(cht.timestamp)}
                                 </span>
+                                {cht.saved ? null: <i onClick={()=>saveMessageHandle(cht)} className="home_savemessage"> <Save/></i>}
                                 </p>
+                                </>
                             ))}
                             <div ref={divRef} />
                         </div>

@@ -11,6 +11,10 @@
     background-color: #ebebeb;
 }
 
+.sidebarChat:active {
+    background-color: #ebebeb;
+}
+
 
 .sidebarChat_info {
     margin-left: 15px;
@@ -85,7 +89,11 @@
 .sidebar_chats {
     flex: 1;
     background-color: white;
-    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.home_savemessage:hover {
+    cursor: pointer;
 }
 
 .app{
