@@ -5,7 +5,7 @@ YoChat is an online web message or chat system meant to protect users' privacy w
 ![Sign In Image](https://drive.google.com/uc?export=view&id=1lEhkegJULrBrvJyh6-A52PxMdhsdG9mg)
 
 ## Sign Up Page
-![Sign Up Image](https://drive.google.com/uc?export=view&id=1P3BvwyRx7XsaRCW2gufuv2NYWPlhcbIY)
+![Sign Up Image](https://doc-0o-0s-docs.googleusercontent.com/docs/securesc/b2kh9kr7r095jhk0q5hlbef8eft4j1ts/kh1rteoq7j9v46sakq6pplhrr2lkmvnb/1622657775000/17081511623624699491/17081511623624699491/1P3BvwyRx7XsaRCW2gufuv2NYWPlhcbIY?e=view&authuser=0&nonce=it753lemcaghk&user=17081511623624699491&hash=3pvamchuu0m6nuhe0331d167qof4dnk2)
 
 ## Chat Dashboard
 ![Chat Board Image](https://drive.google.com/uc?export=view&id=1cAHcptR5cz75l2Q9uIW2JWvol4tPrYIL)
