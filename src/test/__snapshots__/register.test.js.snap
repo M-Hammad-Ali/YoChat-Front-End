@@ -1,0 +1,332 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Snapshot Register 1`] = `
+<div
+  className="MuiGrid-root"
+>
+  <div
+    className="MuiPaper-root MuiPaper-elevation1 MuiPaper-rounded"
+    style={
+      Object {
+        "borderRadius": "5%",
+        "height": "74.05vh",
+        "width": "62.5vw",
+      }
+    }
+  >
+    <div
+      className="MuiGrid-root MuiGrid-container"
+    >
+      <div
+        className="MuiGrid-root MuiGrid-grid-xs-6"
+        style={
+          Object {
+            "padding": "5% 0%",
+          }
+        }
+      >
+        <img
+          alt="register"
+          src="./images/Register.png"
+          style={
+            Object {
+              "height": "60vh",
+              "width": "30vw",
+            }
+          }
+        />
+      </div>
+      <div
+        className="MuiGrid-root MuiGrid-grid-xs-6"
+        style={
+          Object {
+            "backgroundColor": "#92E3A9",
+            "borderRadius": "0% 0% 5% 0%",
+          }
+        }
+      >
+        <div
+          align="center"
+          className="MuiGrid-root"
+          style={
+            Object {
+              "height": "60vh",
+              "padding": "5% 20%",
+              "width": "30vw",
+            }
+          }
+        >
+          <div
+            className="MuiAvatar-root MuiAvatar-circle MuiAvatar-colorDefault"
+            style={
+              Object {
+                "backgroundcolor": "#203237",
+                "margin": "8% 3%",
+              }
+            }
+          >
+            <svg
+              aria-hidden={true}
+              className="MuiSvgIcon-root"
+              focusable="false"
+              viewBox="0 0 24 24"
+            >
+              <path
+                d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0-6c1.1 0 2 .9 2 2s-.9 2-2 2-2-.9-2-2 .9-2 2-2zm0 8c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4zm-6 4c.22-.72 3.31-2 6-2 2.7 0 5.8 1.29 6 2H9zm-3-3v-3h3v-2H6V7H4v3H1v2h3v3z"
+              />
+            </svg>
+          </div>
+          <h2>
+            SIGN UP
+          </h2>
+          <div
+            className="MuiFormControl-root MuiTextField-root"
+            fullwidth={true}
+            style={
+              Object {
+                "margin": "1% 1%",
+              }
+            }
+          >
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated Mui-required Mui-required"
+              data-shrink={false}
+            >
+              First Name
+              <span
+                aria-hidden={true}
+                className="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+              >
+                 
+                *
+              </span>
+            </label>
+            <div
+              className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+              onClick={[Function]}
+            >
+              <input
+                aria-invalid={false}
+                autoFocus={false}
+                className="MuiInputBase-input MuiInput-input"
+                disabled={false}
+                name="firstName"
+                onAnimationStart={[Function]}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                placeholder="Enter First Name"
+                required={true}
+                type="text"
+              />
+            </div>
+          </div>
+          <br />
+          <div
+            className="MuiFormControl-root MuiTextField-root"
+            fullwidth={true}
+            style={
+              Object {
+                "margin": "1% 1%",
+              }
+            }
+          >
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated Mui-required Mui-required"
+              data-shrink={false}
+            >
+              Last Name
+              <span
+                aria-hidden={true}
+                className="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+              >
+                 
+                *
+              </span>
+            </label>
+            <div
+              className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+              onClick={[Function]}
+            >
+              <input
+                aria-invalid={false}
+                autoFocus={false}
+                className="MuiInputBase-input MuiInput-input"
+                disabled={false}
+                name="lastName"
+                onAnimationStart={[Function]}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                placeholder="Enter Last Name"
+                required={true}
+                type="text"
+              />
+            </div>
+          </div>
+          <br />
+          <div
+            className="MuiFormControl-root MuiTextField-root"
+            fullwidth={true}
+            style={
+              Object {
+                "margin": "1% 1%",
+              }
+            }
+          >
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated Mui-required Mui-required"
+              data-shrink={false}
+            >
+              Email
+              <span
+                aria-hidden={true}
+                className="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+              >
+                 
+                *
+              </span>
+            </label>
+            <div
+              className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+              onClick={[Function]}
+            >
+              <input
+                aria-invalid={false}
+                autoFocus={false}
+                className="MuiInputBase-input MuiInput-input"
+                disabled={false}
+                name="email"
+                onAnimationStart={[Function]}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                placeholder="Email"
+                required={true}
+                type="text"
+              />
+            </div>
+          </div>
+          <br />
+          <div
+            className="MuiFormControl-root MuiTextField-root"
+            fullwidth={true}
+            style={
+              Object {
+                "margin": "1% 1%",
+              }
+            }
+          >
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated Mui-required Mui-required"
+              data-shrink={false}
+            >
+              Username
+              <span
+                aria-hidden={true}
+                className="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+              >
+                 
+                *
+              </span>
+            </label>
+            <div
+              className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+              onClick={[Function]}
+            >
+              <input
+                aria-invalid={false}
+                autoFocus={false}
+                className="MuiInputBase-input MuiInput-input"
+                disabled={false}
+                name="username"
+                onAnimationStart={[Function]}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                placeholder="Enter Username"
+                required={true}
+                type="text"
+              />
+            </div>
+          </div>
+          <br />
+          <div
+            className="MuiFormControl-root MuiTextField-root"
+            fullwidth={true}
+            style={
+              Object {
+                "margin": "1% 1%",
+              }
+            }
+          >
+            <label
+              className="MuiFormLabel-root MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated Mui-required Mui-required"
+              data-shrink={false}
+            >
+              Password
+              <span
+                aria-hidden={true}
+                className="MuiFormLabel-asterisk MuiInputLabel-asterisk"
+              >
+                 
+                *
+              </span>
+            </label>
+            <div
+              className="MuiInputBase-root MuiInput-root MuiInput-underline MuiInputBase-formControl MuiInput-formControl"
+              onClick={[Function]}
+            >
+              <input
+                aria-invalid={false}
+                autoFocus={false}
+                className="MuiInputBase-input MuiInput-input"
+                disabled={false}
+                name="password"
+                onAnimationStart={[Function]}
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                placeholder="Enter Password"
+                required={true}
+                type="password"
+              />
+            </div>
+          </div>
+          <br />
+          <button
+            className="MuiButtonBase-root MuiButton-root MuiButton-contained MuiButton-containedPrimary Mui-disabled Mui-disabled"
+            disabled={true}
+            onBlur={[Function]}
+            onClick={[Function]}
+            onDragLeave={[Function]}
+            onFocus={[Function]}
+            onKeyDown={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseLeave={[Function]}
+            onMouseUp={[Function]}
+            onTouchEnd={[Function]}
+            onTouchMove={[Function]}
+            onTouchStart={[Function]}
+            style={
+              Object {
+                "backgroundColor": "",
+                "margin": "7% 2%",
+              }
+            }
+            tabIndex={-1}
+            type="submit"
+          >
+            <span
+              className="MuiButton-label"
+            >
+              Sign Up
+            </span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
