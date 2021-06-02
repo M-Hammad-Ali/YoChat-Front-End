@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# Introduction
+YoChat is an online web message or chat system meant to protect users' privacy while maintaining the enjoyment of conversing with friends and family. It is built with Single Page Web Application Technology.
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sign In
+![Sign In Image](https://drive.google.com/file/d/1lEhkegJULrBrvJyh6-A52PxMdhsdG9mg/view?usp=sharing)
 
 ## Available Scripts
 
