@@ -1,5 +1,5 @@
 import React , { useEffect, useRef, useState } from 'react';
-import { Avatar, Backdrop, Badge, CircularProgress, IconButton, LinearProgress, makeStyles, TextField, Tooltip } from '@material-ui/core';
+import { Avatar, Backdrop, CircularProgress, IconButton, LinearProgress, makeStyles, TextField, Tooltip } from '@material-ui/core';
 import {  SearchOutlined, PersonAdd, Save, ExitToAppSharp} from '@material-ui/icons';
 import axios from 'axios';
 import Autocomplete from '@material-ui/lab/Autocomplete';
@@ -249,7 +249,6 @@ function Home() {
                                                         <div className="sidebarChat_info">
                                                             <h2>{friend}</h2>
                                                         </div>
-                                                        <Badge badgeContent={4} color="primary"></Badge>
                                                 </div>
                                         ))
                                     }
@@ -283,9 +282,16 @@ function Home() {
                                 <span className="chat_name">{cht.from}</span>
                                     {cht.msgText}
                                 <span className="chat_timestamp">
-                                    {moment().fromNow(cht.timestamp)}
+                                    {cht.timestamp}
                                 </span>
-                                {cht.saved ? null: <i onClick={()=>saveMessageHandle(cht)} className="home_savemessage"> <Save/></i>}
+                                {cht.saved || (cht.seenByFrom && cht.seenByTo) ? null  : <i onClick={()=>saveMessageHandle(cht)} className="home_savemessage"> <Save/></i>}
+                                <br/>
+                                {cht.saved && <span className="chat_timestamp">
+                                    Message Saved
+                                </span>}
+                                {!cht.saved && (cht.seenByFrom && cht.seenByTo) && <span className="chat_timestamp">
+                                    Seen
+                                </span>}
                                 </p>
                                 </>
                             ))}
