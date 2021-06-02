@@ -2,7 +2,7 @@
 YoChat is an online web message or chat system meant to protect users' privacy while maintaining the enjoyment of conversing with friends and family. It is built with Single Page Web Application Technology.
 
 # Sign In
-![Sign In Image](https://drive.google.com/file/d/1lEhkegJULrBrvJyh6-A52PxMdhsdG9mg/view?usp=sharing)
+![Sign In Image](https://drive.google.com/drive/u/0/folders/126a2KY78Gt9w8MulQYrH-_dGUl-e7-an)
 
 ## Available Scripts
 
