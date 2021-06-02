@@ -11,9 +11,11 @@ YoChat is an online web message or chat system meant to protect users' privacy w
 ![Chat Board Image](https://drive.google.com/uc?export=view&id=1cAHcptR5cz75l2Q9uIW2JWvol4tPrYIL)
 
 # Run Project
-To run this project you have to clone two repositories:
-Front-End: https://github.com/M-Hammad-Ali/YoChat-Front-End
-Backend: https://github.com/bilalwaheed099/yoChat-backend
+To run this project you have to clone two repositories:<br />
+
+Front-End: https://github.com/M-Hammad-Ali/YoChat-Front-End<br />
+
+Backend: https://github.com/bilalwaheed099/yoChat-backend<br />
 
 After cloning both repositories,you have to run the below scripts to start the project but make sure to include your mongodb config key in the backend config folder.
 
