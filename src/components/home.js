@@ -1,12 +1,22 @@
 import React , { useEffect, useRef, useState } from 'react';
-import { Avatar, IconButton, TextField } from '@material-ui/core';
-import { AttachFile, SearchOutlined,MoreVert, InsertEmoticon, Mic, Chat, DonutLarge, PersonAdd, NotInterested, Save} from '@material-ui/icons';
+import { Avatar, Backdrop, Badge, CircularProgress, IconButton, LinearProgress, makeStyles, TextField, Tooltip } from '@material-ui/core';
+import {  SearchOutlined, PersonAdd, Save, ExitToAppSharp} from '@material-ui/icons';
 import axios from 'axios';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import moment from 'moment';
+import { useHistory } from 'react-router';
 
 import './home.css';
 import BackgroundPic from '../assets/Register.png';
+
+
+const useStyles = makeStyles((theme) => ({
+    backdrop: {
+      zIndex: theme.zIndex.drawer + 1,
+      color: '#fff',
+    },
+  }));
+
 
 function Home() {
 
@@ -17,20 +27,30 @@ function Home() {
     const [allFriends,setFriends] = useState([]);
     const [chat,setChat] = useState([]);
     const divRef = useRef(null);
-    
+    const classes = useStyles();
+    const [open, setOpen] = useState(false);
+    const [chatLoading,setChatLoading] = useState(false);
+
+    const history = useHistory();
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     useEffect(async ()=>{
         const username = localStorage.getItem('username');
         console.log(username);
+        setOpen(true);
         const res = await axios.post('http://localhost:5000/api/users/userdata',{
             username:username
         });
         const allUsers = await axios.get('http://localhost:5000/api/friends/allusers')
-        console.log(allUsers);
+        console.log(res,"ressssssssss");
         setAllUsers(allUsers.data);
         setUser(res.data);
         setFriends(res.data.friends);
         console.log(res.data);
+        setOpen(false);
     },[]);
 
     
@@ -93,6 +113,7 @@ function Home() {
   
     const handleSelectUser = async (username)=>{
         console.log("username",username);
+        setChatLoading(true);
         const res = await axios.post('http://localhost:5000/api/chats/getChat',{
             curUser:localStorage.getItem('username'),
             handle:username,
@@ -105,6 +126,7 @@ function Home() {
         if(res.data !== null && res.data.success !==false){
             divRef.current.scrollIntoView({ behavior: 'smooth' });
         }
+        setChatLoading(false);
         let messagesID = [];
         for(let msg in res.data.msgs){
             if(res.data.msgs[msg].to === localStorage.getItem('username')){
@@ -159,6 +181,9 @@ function Home() {
 
     return (
     <div className="app">
+        <Backdrop className={classes.backdrop} open={open} onClick={handleClose}>
+            <CircularProgress color="inherit" />
+        </Backdrop>
       <div className="app_body">
         {user ? 
             <>
@@ -166,15 +191,15 @@ function Home() {
                     <div className="sidebar_header"> 
                         <Avatar src="https://media-exp1.licdn.com/dms/image/C4D03AQETJkHu9f2njg/profile-displayphoto-shrink_800_800/0/1610014589603?e=1619654400&v=beta&t=5_hmMnIxU2bDi8i1P0rWiLvSPLIh6VssRw7vP0dXoeg" />
                         <div className="sidebar_headerRight">
-                            <IconButton>
-                                <DonutLarge></DonutLarge>
-                            </IconButton>
-                            <IconButton>
-                                <Chat/>
-                            </IconButton>
-                            <IconButton>
-                                <MoreVert/>
-                            </IconButton>
+                            <Tooltip title="Logout">
+                                <IconButton onClick={()=>{
+                                    localStorage.removeItem('username');
+                                    localStorage.removeItem('token');
+                                    history.push('/')
+                                }}>
+                                    <ExitToAppSharp/>
+                                </IconButton>
+                            </Tooltip>
                         </div>
                     </div>
                         <Autocomplete
@@ -217,14 +242,15 @@ function Home() {
                                 <>
                                     {
                                         allFriends.map(friend=>(
-                                            <div className="sidebarChat" key={friend} onClick={()=>handleSelectUser(friend)}
-                                                style={{backgroundColor:selectedUser!== null && selectedUser.userHandle1===friend ? "#ebebeb":null}}
-                                            >
-                                                <Avatar/>
-                                                <div className="sidebarChat_info">
-                                                    <h2>{friend}</h2>
+                                                <div className="sidebarChat" key={friend} onClick={()=>handleSelectUser(friend)}
+                                                    style={{backgroundColor:selectedUser!== null && (selectedUser.userHandle1===friend ? "#ebebeb":null||selectedUser.userHandle2===friend ? "#ebebeb":null)}}
+                                                >
+                                                        <Avatar/>
+                                                        <div className="sidebarChat_info">
+                                                            <h2>{friend}</h2>
+                                                        </div>
+                                                        <Badge badgeContent={4} color="primary"></Badge>
                                                 </div>
-                                            </div>
                                         ))
                                     }
                                 </>
@@ -244,15 +270,6 @@ function Home() {
                             <h3>{`${user.firstName} ${user.lastName}`}</h3>
                         </div>
                         <div className="chat_headerRight">
-                            <IconButton>
-                                <SearchOutlined/>
-                            </IconButton>
-                            <IconButton>
-                                <AttachFile/>
-                            </IconButton>
-                            <IconButton>
-                                <MoreVert/>
-                            </IconButton>
                         </div>
                     </div>
                     {selectedUser !== null? 
@@ -274,8 +291,8 @@ function Home() {
                             ))}
                             <div ref={divRef} />
                         </div>
-                        <div className="chat_footer">
-                            <InsertEmoticon/>
+                        {chatLoading && <LinearProgress color="secondary" />}
+                        {!chatLoading && <div className="chat_footer">
                             <form>
                                 <input 
                                     value={input}
@@ -283,8 +300,8 @@ function Home() {
                                     placeholder="Type a message" type="text"/>
                                 <button onClick={sendMessage} type="submit">Send a message</button>
                             </form>
-                            <Mic/>
                         </div>
+                        }
                         </> 
                     : <img src={BackgroundPic}  style={{width:"85%",height:"500px"}} />  }
                 </div>

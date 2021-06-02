@@ -20,10 +20,13 @@
     margin-left: 15px;
 }
 
-.sidebarChat_info > h2 {
+.sidebarChat_info  h2 {
     font-size: 16px !important;
 }
 
+.MuiBadge-root {
+    position: absolute !important;
+}
 
 .sidebar {
     display: flex;
@@ -42,7 +45,6 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    min-width:10vw;
 }
 
 .sidebar_headerRight > .MuiSvgIcon-root {
@@ -89,7 +91,7 @@
 .sidebar_chats {
     flex: 1;
     background-color: white;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .home_savemessage:hover {
@@ -143,7 +145,7 @@
     flex: 1;
     background-position: center;
     padding: 30px;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .chat_message {
